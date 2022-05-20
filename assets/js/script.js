@@ -1,6 +1,7 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 var passwordMin = 8, passwordMax = 128;
+var charTypes = ["lowercase","uppercase","numeric","special"];
 
 // 8min - 128max Characters
 // Characters Types - at least 1
@@ -12,45 +13,15 @@ var passwordMin = 8, passwordMax = 128;
 
 function generatePassword() {
   // add your logic here
-  passwordSize = passwordSizePrompt();
+  var passwordSize = passwordSizePrompt();
+  var validCharacters = validCharactersPrompt();
 
-  var passwordInfo = {
-    passwordSize: passwordSizePrompt(),
-    charTypes: [
-      {type:"lowercase", valid: false},
-      {type:"uppercase", valid: false},
-      {type:"numeric", valid: false},
-      {type:"special", valid: false}
-    ]
-  };    
-  var validCharacters = "";
-  while (validCharacters === "") {
-    window.alert("Please select at least one character type to use.");
-    for (var i = 0; i < passwordInfo.charTypes.length; i++) {
-      passwordInfo.charTypes[i].valid = characterTypePrompt(passwordInfo.charTypes[i].type);
-      if (passwordInfo.charTypes[i].valid) {
-        switch (passwordInfo.charTypes[i].type) {
-          case "lowercase":
-            validCharacters += getValidCharacters('a', 'z');
-            break;
-          case "uppercase":
-            validCharacters += getValidCharacters('A', 'Z');
-            break;
-          case "numeric":
-            validCharacters += getValidCharacters('0', '9');
-            break;
-          case "special":
-            validCharacters += getValidCharacters('!', '/');
-            break;
-        }
-      }
-    }
-  }
   console.log(validCharacters);
-  console.log(passwordInfo);
+  console.log(passwordSize);
   return;
 }
 
+// Will ask user for input repeatedly until a non-empty or null response
 function getValidResponse(message){
   var resp = window.prompt(message);
   while(resp === null || resp === ""){
@@ -60,6 +31,8 @@ function getValidResponse(message){
   return resp;
 }
 
+// Prompts the user for size of desired password
+// Loops until a valid length is specified
 function passwordSizePrompt() {
   var response = "";
   var validResponse = false;
@@ -74,15 +47,48 @@ function passwordSizePrompt() {
   return response;
 }
 
-function characterTypePrompt(charType){
-  return window.confirm("Should your password contain " + charType + " characters?");
+// Loops to prompt the user to choose which character types to use
+// Will not proceed if at least one character type is not selected
+// Returns string of all valid characters based on user's choices
+function validCharactersPrompt() {
+  validChars = "";
+  while (validChars === "") {
+    window.alert("Please select at least one character type to use.");
+    for (var i = 0; i < charTypes.length; i++) {
+      if (window.confirm("Should your password contain " + charTypes[i] + " characters?")) {
+        validChars += getValidCharacters(charTypes[i])
+      }
+    }
+  }
+  return validChars;
 }
 
-function getValidCharacters(char1,char2){
+// Returns a string with of the valid characters for the given character type
+function getValidCharacters(charType){
+  var char1, char2;
   var returnString = "";
+  switch (charType) {
+    case "lowercase":
+      char1 = 'a';
+      char2 = 'z';  
+      break;
+    case "uppercase":
+      char1 = 'A';
+      char2 = 'Z';
+      break;
+    case "numeric":
+      char1 = '0';
+      char2 = '9';
+      break;
+    case "special":
+      char1 = '!';
+      char2 = '/';
+      break;
+  }
   for(let i = char1.charCodeAt(); i <= char2.charCodeAt(); i++){
     returnString += String.fromCharCode(i);
   }
+  console.log(returnString);
   return returnString;
 }
 
