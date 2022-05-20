@@ -1,24 +1,21 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+
+// Specifying password minimum and maximum length and character types
 var passwordMin = 8, passwordMax = 128;
 var charTypes = ["lowercase","uppercase","numeric","special"];
 
-// 8min - 128max Characters
-// Characters Types - at least 1
-//  lowercase
-//  uppercase
-//  numberic
-//  special
-// generate
-
+// creates a password using the valid character types and password size input by user
 function generatePassword() {
   // add your logic here
   var passwordSize = passwordSizePrompt();
   var validCharacters = validCharactersPrompt();
 
-  console.log(validCharacters);
-  console.log(passwordSize);
-  return;
+  var password = "";
+  for (var i = 0; i < passwordSize; i++){
+    password += validCharacters.charAt(Math.floor(Math.random() * (validCharacters.length)));
+  }
+  return password;
 }
 
 // Will ask user for input repeatedly until a non-empty or null response
@@ -88,7 +85,6 @@ function getValidCharacters(charType){
   for(let i = char1.charCodeAt(); i <= char2.charCodeAt(); i++){
     returnString += String.fromCharCode(i);
   }
-  console.log(returnString);
   return returnString;
 }
 
