@@ -8,12 +8,15 @@ var charTypes = ["lowercase","uppercase","numeric","special"];
 // creates a password using the valid character types and password size input by user
 function generatePassword() {
   // add your logic here
-  var passwordSize = passwordSizePrompt();
+  var passwordSize = (Math.floor(Math.random() * 121) + 8); //passwordSizePrompt();
   var validCharacters = validCharactersPrompt();
 
   var password = "";
   for (var i = 0; i < passwordSize; i++){
     password += validCharacters.charAt(Math.floor(Math.random() * (validCharacters.length)));
+  }
+  if (password.length != passwordSize){
+    console.log("Desired length not generated. Password Length: " + password.length + " Password Size: " + passwordSize);
   }
   return password;
 }
@@ -50,9 +53,9 @@ function passwordSizePrompt() {
 function validCharactersPrompt() {
   validChars = "";
   while (validChars === "") {
-    window.alert("Please select at least one character type to use.");
+    //window.alert("Please select at least one character type to use.");
     for (var i = 0; i < charTypes.length; i++) {
-      if (window.confirm("Should your password contain " + charTypes[i] + " characters?")) {
+      if (Math.random() > 0.5) { // window.confirm("Should your password contain " + charTypes[i] + " characters?")
         validChars += getValidCharacters(charTypes[i])
       }
     }
@@ -90,11 +93,12 @@ function getValidCharacters(charType){
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
+  var password,
+  passwordText = document.querySelector("#password");
+  for (var i = 0; i < 50; i++){
+    password = generatePassword();
+    passwordText.value = password;
+  }
 }
 
 // Add event listener to generate button
