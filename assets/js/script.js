@@ -18,27 +18,20 @@ function generatePassword() {
   return password;
 }
 
-// Will ask user for input repeatedly until a non-empty or null response
-function getValidResponse(message){
-  var resp = window.prompt(message);
-  while(resp === null || resp === ""){
-    window.alert("Please enter a valid response.");
-    resp = window.prompt(message);
-  }
-  return resp;
-}
-
 // Prompts the user for size of desired password
 // Loops until a valid length is specified
 function passwordSizePrompt() {
   var response = "";
-  var validResponse = false;
-  while (!validResponse) {
-    response = parseInt(getValidResponse("What length would you like your password to be? (Min: " + passwordMin + ", Max: " + passwordMax + ")"));
-    if (response < passwordMin || response > passwordMax) {
+  while (response === "") {
+    response = window.prompt("What length would you like your password to be? (Min: " + passwordMin + ", Max: " + passwordMax + ")");
+    if (response === null || response === ""){
+      window.alert("Please enter a valid response.");
+      response = "";
+    } else if (parseInt(response) < passwordMin || parseInt(response) > passwordMax){
       window.alert("Please enter a number between " + passwordMin + " and " + passwordMax + ".");
+      response = "";
     } else {
-      validResponse = true;
+      response = parseInt(response);
     }
   }
   return response;
@@ -53,39 +46,24 @@ function validCharactersPrompt() {
     window.alert("Please select at least one character type to use.");
     for (var i = 0; i < charTypes.length; i++) {
       if (window.confirm("Should your password contain " + charTypes[i] + " characters?")) {
-        validChars += getValidCharacters(charTypes[i])
+        switch (charTypes[i]) {
+          case "lowercase":
+            validChars += "abcdefghijklmnopqrstuvwxyz"; 
+            break;
+          case "uppercase":
+            validChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            break;
+          case "numeric":
+            validChars += "0123456789";
+            break;
+          case "special":
+            validChars += "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+            break;
+        }
       }
     }
   }
   return validChars;
-}
-
-// Returns a string with of the valid characters for the given character type
-function getValidCharacters(charType){
-  var char1, char2;
-  var returnString = "";
-  switch (charType) {
-    case "lowercase":
-      char1 = 'a';
-      char2 = 'z';  
-      break;
-    case "uppercase":
-      char1 = 'A';
-      char2 = 'Z';
-      break;
-    case "numeric":
-      char1 = '0';
-      char2 = '9';
-      break;
-    case "special":
-      char1 = '!';
-      char2 = '/';
-      break;
-  }
-  for(let i = char1.charCodeAt(); i <= char2.charCodeAt(); i++){
-    returnString += String.fromCharCode(i);
-  }
-  return returnString;
 }
 
 // Write password to the #password input
