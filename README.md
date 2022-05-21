@@ -1,11 +1,9 @@
 # 03 JavaScript: Password Generator
 
 ## Description 
-This project was to create the logic needed to make a password generator. The HTML and CSS for the application was provided with a small amount of JavaScript, and the goal was to complete the JavaScript to meet the criteria. The application must prompt the user to input the desired password length and select which character types to use and validate their inputs. Once validated, the password should be generated and displayed to the user.
+This project was to create the logic needed to make a password generator. The HTML and CSS for the application was provided with a small amount of JavaScript, and the goal was to complete the JavaScript to meet the criteria. The application must prompt the user to input the desired password length and select which character types to use and validate their inputs. Once validated, the password should be generated and displayed to the user. 
 
-Create an application that generates a random password based on user-selected criteria. The app runs in the browser and features dynamically updated HTML and CSS powered by your JavaScript code. It has a clean and polished user interface and is responsive, which ensures that it adapts to multiple screen sizes.
-
-If you are unfamiliar with special characters, take a look at some [examples of special characters on the OWASP Foundation website](https://www.owasp.org/index.php/Password_special_characters).
+List of [special characters](https://www.owasp.org/index.php/Password_special_characters) that were used, excluding the space character.
 
 ## User Story
 
@@ -35,17 +33,20 @@ WHEN the password is generated
 THEN the password is either displayed in an alert or written to the page
 ```
 
-The following image demonstrates the application functionality:
+## Product
 
-![An app window with the label Password Generator, an input field labeled Your Secure Password, and a Generate Password button.](./assets/images/03-javascript-homework-demo.png)
+The deployed application can be found here: [Password Generator](https://cnohilly.github.io/password-generator/)
 
-## Review
+The following images display the appearance and functionality of the deployed application:
 
-You are required to submit the following for review:
+Base App:
+![Password Generator app with a button to Generate a Password and a textarea labeled Your Secure Password](./assets/images/password-generator-app.jpg)
 
-* The URL of the deployed application.
+Size Prompt:
+![Password Generator app with a prompt to input password size](./assets/images/password-generator-size-prompt.jpg)
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
+Character Prompt:
+![Password Generator app with a prompt to select desired character](./assets/images/password-generator-character-prompt.jpg)
 
-- - -
-© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+Example Generated Password:
+![Password Generator app with an example of a generated password](./assets/images/password-generator-example.jpg)
