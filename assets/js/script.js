@@ -27,7 +27,7 @@ function passwordSizePrompt() {
     if (response === null || response === ""){
       window.alert("Please enter a valid response.");
       response = "";
-    } else if (parseInt(response) < passwordMin || parseInt(response) > passwordMax){
+    } else if (!parseInt(response) || parseInt(response) < passwordMin || parseInt(response) > passwordMax){
       window.alert("Please enter a number between " + passwordMin + " and " + passwordMax + ".");
       response = "";
     } else {
