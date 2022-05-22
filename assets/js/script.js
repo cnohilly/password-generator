@@ -27,7 +27,7 @@ and loops until a valid length is given
 */
 function passwordSizePrompt() {
   var response = "";
-  while (response === "") {
+  while (!response) {
     response = prompt("What length would you like your password to be? (Min: " + passwordMin + ", Max: " + passwordMax + ")");
     if (response === null || response === "") {
       alert("Please enter a valid response.");
@@ -49,7 +49,7 @@ returns string of all valid characters based on user's choices
 */
 function validCharactersPrompt() {
   validChars = "";
-  while (validChars === "") {
+  while (!validChars) {
     alert("Please select at least one character type to use.");
     for (var i = 0; i < charTypes.length; i++) {
       if (confirm("Should your password contain " + charTypes[i] + " characters?")) {
